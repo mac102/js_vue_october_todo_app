@@ -1,0 +1,14 @@
+fields:
+    title:
+        label: Title
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: large
+        span: auto
+        type: textarea
+    status:
+        label: Status
+        span: auto
+        type: switch

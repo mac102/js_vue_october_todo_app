@@ -1,0 +1,10 @@
+name: Todo
+form: $/maciejfrankowski/todo/models/todo/fields.yaml
+modelClass: Maciejfrankowski\Todo\Models\Todo
+defaultRedirect: maciejfrankowski/todo/todo
+create:
+    redirect: 'maciejfrankowski/todo/todo/update/:id'
+    redirectClose: maciejfrankowski/todo/todo
+update:
+    redirect: maciejfrankowski/todo/todo
+    redirectClose: maciejfrankowski/todo/todo

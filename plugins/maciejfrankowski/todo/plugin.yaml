@@ -1,0 +1,11 @@
+plugin:
+    name: 'maciejfrankowski.todo::lang.plugin.name'
+    description: 'maciejfrankowski.todo::lang.plugin.description'
+    author: MaciejFrankowski
+    icon: oc-icon-list
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Todos
+        url: maciejfrankowski/todo/todo
+        icon: icon-list
