@@ -1,6 +1,7 @@
 <?php
 
 use Maciejfrankowski\Todo\Models\Todo;
+//use Symfony\Component\HttpFoundation\Response;
 
 Route::get('api/populate', function() {
     $faker = Faker\Factory::create();
@@ -20,6 +21,6 @@ Route::get('api/populate', function() {
 
 Route::get('api/todos', function() {
     $todos = Todo::all();
-
-    return $todos;
+    //return $todos;
+    return response($todos)->header('Access-Control-Allow-Origin', '*');
 });
