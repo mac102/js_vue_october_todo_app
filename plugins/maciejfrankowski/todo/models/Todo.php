@@ -20,4 +20,7 @@ class Todo extends Model
      */
     public $rules = [
     ];
+
+    // for mass ..  exception
+    public $fillable = ['title', 'description', 'status'];
 }
