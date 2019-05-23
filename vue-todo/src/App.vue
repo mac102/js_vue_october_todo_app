@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <CreateTodo v-on:create-todo="addTodo"></CreateTodo>
+    <div class="header primary">
+        <h1>Vue2 + OctoberCms Todo list</h1>    
+    </div>  
+    <CreateTodo class="create-form" v-on:create-todo="addTodo"></CreateTodo>
     <TodoList :todos="todos"></TodoList>
   </div>
 </template>
@@ -58,4 +61,25 @@ export default {
 </script>
 
 <style>
+    .header {
+        text-align: center;
+        background-color: #1779ba;
+        color: #fefefe;
+    }
+
+    .header h1 {
+        margin-bottom: 0;
+    }
+
+    .create-form {
+        position: relative;
+        text-align: center;
+        border-bottom:  1px solid #ccc;
+        padding: 10px;
+        background: floralwhite;
+    }
+
+    .button {
+        border-radius: 8px;
+    }
 </style>

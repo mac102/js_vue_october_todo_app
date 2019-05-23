@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <button class="button success" v-on:click="openForm" v-show="!isCreating">Create ToDo</button>
+            <button class="button success addnote" v-on:click="openForm" v-show="!isCreating">Add note</button>
 
             <div class="todo-create" v-show="isCreating">
                 <input type="text" placeholder="Enter title" v-model="titleText" ref="title">
@@ -56,7 +56,10 @@
 
 <style>
     .todo-create {
-        margin: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
         width: 500px;
         padding: 20px;
         border: 1px solid #ccc;
@@ -65,5 +68,9 @@
     .todo-create textarea {
         height: 150px;
 
+    }
+
+    .addnote {
+        margin-bottom: 0;
     }
 </style>

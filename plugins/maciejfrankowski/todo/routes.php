@@ -2,9 +2,6 @@
 
 use Maciejfrankowski\Todo\Models\Todo;
 use Illuminate\Http\Request;
-//use Symfony\Component\HttpFoundation\Request;
-
-//use Symfony\Component\HttpFoundation\Response;
 
 Route::get('api/populate', function() {
     $faker = Faker\Factory::create();
@@ -24,7 +21,6 @@ Route::get('api/populate', function() {
 
 Route::get('api/todos', function() {
     $todos = Todo::all();
-    //return response($todos)->header('Access-Control-Allow-Origin', '*');
     return $todos;
 });
 
@@ -55,6 +51,17 @@ Route::post('api/update-todo', function(Request $req){
         );
 });
 
+/**
+ * Create array from request string
+ * 
+ * There is'a problem with (probably related with CORS) POST and application/json content type from axios library.
+ * Only application/x-www-form-urlencoded is passing.
+ *
+ * TODO: fix this..
+ *
+ * @param Request $req
+ * @return array
+ */
 function getDataFromReq(Request $req): array {
     return json_decode(
         $req->getContent(),

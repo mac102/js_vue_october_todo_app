@@ -9,8 +9,8 @@
                 <h3>{{todo.title}}</h3>
                 <p>{{todo.description}}</p>
 
-                <button class="button primary" @click="showForm()">Edit</button>
-                <button class="button alert" @click="deleteTodo(todo)">Delete</button>
+                <button class="hollow button primary" @click="showForm()">Edit</button>
+                <button class="hollow button alert" @click="deleteTodo(todo)">Delete</button>
             </div>
 
             <div class="columns large-11" v-show="editing">
@@ -75,6 +75,7 @@ export default {
         padding: 20px;
         border: 1px solid #ccc;
         margin-bottom: 20px;
+        background: floralwhite;
     }
 
     .todo-complete-icon{
@@ -86,6 +87,7 @@ export default {
         margin-top: 10px;
         position: relative;
         cursor: pointer;
+        background-color: white;
     }
 
     .todo-complete-icon.completed{
