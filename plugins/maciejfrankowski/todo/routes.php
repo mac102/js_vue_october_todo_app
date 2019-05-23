@@ -1,6 +1,9 @@
 <?php
 
 use Maciejfrankowski\Todo\Models\Todo;
+use Illuminate\Http\Request;
+//use Symfony\Component\HttpFoundation\Request;
+
 //use Symfony\Component\HttpFoundation\Response;
 
 Route::get('api/populate', function() {
@@ -21,6 +24,40 @@ Route::get('api/populate', function() {
 
 Route::get('api/todos', function() {
     $todos = Todo::all();
-    //return $todos;
-    return response($todos)->header('Access-Control-Allow-Origin', '*');
+    //return response($todos)->header('Access-Control-Allow-Origin', '*');
+    return $todos;
 });
+
+Route::post('api/add-todo', function(Request $req){
+    $data = getDataFromReq($req);
+    Todo::create($data);
+});
+
+Route::post('api/delete-todo', function(Request $req){
+    $data = getDataFromReq($req);
+    Todo::destroy($data['id']);
+});
+
+Route::post('api/toggle-todo', function(Request $req){
+    $data = getDataFromReq($req);
+    Todo::where('id', $data['id'])->update(['status' => $data['status']]);
+});
+
+Route::post('api/update-todo', function(Request $req){
+    $data = getDataFromReq($req);
+    Todo::where('id', $data['id'])
+        ->update(
+            [
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'status' => $data['status']
+            ]
+        );
+});
+
+function getDataFromReq(Request $req): array {
+    return json_decode(
+        $req->getContent(),
+        true
+    );
+}

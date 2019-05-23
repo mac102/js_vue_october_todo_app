@@ -1,36 +1,63 @@
 <template>
   <div>
-    <h1>Todo component</h1>
+    <div class="row">
+      <div class="columns large-6">
+        <h2>Uncompleted ({{unCompletedTodos.length}})</h2>
+        <todo v-for="todo in unCompletedTodos" :todo="todo" :key="todo.id" @delete-todo="deleteTodo(todo)" @toogle-todo="toggleTodo(todo)"></todo>
+      </div>
 
-    <ul>
-      <li v-for="todo in todos">
-          <h3>{{ todo.title }}</h3>
-          <p>{{ todo.description }}</p>
-      </li>
-    </ul>
+      <div class="columns large-6">
+        <h2>Completed ({{completedTodos.length}})</h2>
+        <todo v-for="todo in completedTodos" :todo="todo" :key="todo.id" @delete-todo="deleteTodo(todo)" @toogle-todo="toggleTodo(todo)"></todo>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-
-import axios from 'axios';
+import axios from "axios";
+import todo from "./todo";
 
 export default {
   name: "TodoList",
-  data: function() {
-    return {
-      todos: []
-    };
+  props: ["todos"],
+  components: {
+    todo
   },
-
-    mounted: function() {
-        var _self = this;
-        
-        axios.get('http://localhost/vuetodo/api/todos').then(function(response) {
-            _self.todos = response.data;
-        });
+  computed: {
+    completedTodos: function() {
+      return this.todos.filter(function(todo) {
+        return todo.status == 1;
+      });
+    },
+    unCompletedTodos: function() {
+      return this.todos.filter(function(todo) {
+        return todo.status == 0;
+      });
     }
+  },
+  methods: {
+    deleteTodo: function(todo) {
+      var todoIndex = this.todos.indexOf(todo);
 
+      this.todos.splice(todoIndex, 1);
+
+      axios.post("http://localhost/vuetodo/api/delete-todo", todo, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      });
+    },
+    toggleTodo: function(todo) {
+        todo.status = (todo.status == 1 ? 0 : 1);
+
+        axios.post("http://localhost/vuetodo/api/toggle-todo", todo, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      });
+    }
+  }
 };
 </script>
 
